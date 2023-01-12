@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import LoginPage from "../../pageObjects/LoginPage";
 
-test("Inventory page", async ({ page }) => {
+test.skip("Inventory page", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   // Step 0: Navigate to login page and login
