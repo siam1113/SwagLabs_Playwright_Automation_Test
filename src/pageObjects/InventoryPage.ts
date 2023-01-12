@@ -47,6 +47,10 @@ export default class InventoryPage {
     await this.removeBtn.click();
   }
 
+  async clickOnFirstRemoveBtn() {
+    await this.removeBtn.nth(1).click();
+  }
+
   async verifyProductsAreVisible() {
     expect(await this.page.locator("div.inventory_item").count()).toBe(6);
   }

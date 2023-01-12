@@ -54,9 +54,9 @@ test.describe(`Inventory page`, () => {
     await expect(productPage.cartProductCount).toHaveText("3");
 
     // Step 3: Remove one product
-    await inventoryPage.clickOnRemoveBtn();
+    await inventoryPage.clickOnFirstRemoveBtn();
 
     // Step 4: Verify products removed
-    await expect(productPage.cartProductCount).toHaveText("2");
+    await expect(productPage.cartProductCount).toHaveText("2 ");
   });
 });
