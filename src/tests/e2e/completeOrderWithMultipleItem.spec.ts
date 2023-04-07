@@ -6,7 +6,7 @@ import LoginPage from "../../pageObjects/LoginPage";
 import ProductPage from "../../pageObjects/ProductPage";
 import { URLS } from "../../pageData/pageData";
 
-test.only(`Verify completing order with multiple item`, async ({ page }) => {
+test(`Verify completing order with multiple item`, async ({ page }) => {
   const loginPage = new LoginPage(page);
   const inventoryPage = new InventoryPage(page);
   const productPage = new ProductPage(page);
