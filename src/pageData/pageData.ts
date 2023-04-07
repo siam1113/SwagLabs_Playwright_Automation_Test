@@ -1,3 +1,13 @@
+export const URLS = {
+  homePage: "/",
+  inventoryPage: "/inventory.html",
+  productPage: "/inventory-item.html",
+  cartPage: "/cart.html",
+  checkOutPageStepOne: "/checkout-step-one.html",
+  checkOutPageStepTwo: "/checkout-step-two.html",
+  checkOutPageComplete: "/checkout-complete.html",
+};
+
 export const logInCredentials = {
   userName: "standard_user",
   password: "secret_sauce",

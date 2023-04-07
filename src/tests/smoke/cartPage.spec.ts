@@ -3,6 +3,7 @@ import CartPage from "../../pageObjects/CartPage";
 import InventoryPage from "../../pageObjects/InventoryPage";
 import LoginPage from "../../pageObjects/LoginPage";
 import ProductPage from "../../pageObjects/ProductPage";
+import { URLS } from "../../pageData/pageData";
 
 test.describe(`Cart page`, () => {
   test("Verify the functionality of remove and continue shopping button", async ({
@@ -16,14 +17,14 @@ test.describe(`Cart page`, () => {
     // Step 0: Navigate to login page and login
     await page.goto("/");
     await loginPage.logIntoApplication();
-    await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(page).toHaveURL(URLS.inventoryPage);
 
     // Step 3: Click on add single product in the cart
     await inventoryPage.addSingleProductInTheCart();
 
     // Step 4: Navigate to cart page
     await productPage.clickOnCartIcon();
-    await expect(page).toHaveURL("https://www.saucedemo.com/cart.html");
+    await expect(page).toHaveURL(URLS.cartPage);
 
     // Step 5: Verify product added to the cart
     await expect(productPage.cartProductCount).toHaveText("1");
@@ -38,6 +39,6 @@ test.describe(`Cart page`, () => {
     await cartPage.clickOnContinueShopping();
 
     // Step 9: Verify user navigated to inventory page again
-    await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(page).toHaveURL(URLS.inventoryPage);
   });
 });

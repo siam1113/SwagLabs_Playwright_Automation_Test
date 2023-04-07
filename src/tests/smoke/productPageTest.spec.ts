@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import InventoryPage from "../../pageObjects/InventoryPage";
 import LoginPage from "../../pageObjects/LoginPage";
 import ProductPage from "../../pageObjects/ProductPage";
+import { URLS } from "../../pageData/pageData";
 
 test.describe(`Product page`, () => {
   test("Verify the functionality of add/remove and back to order button", async ({
@@ -14,13 +15,11 @@ test.describe(`Product page`, () => {
     // Step 0: Navigate to login page and login
     await page.goto("/");
     await loginPage.logIntoApplication();
-    await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(page).toHaveURL(URLS.inventoryPage);
 
     // Step 1: Navigate to product page
     await inventoryPage.clickOnTheProduct();
-    expect(page.url()).toContain(
-      "https://www.saucedemo.com/inventory-item.html"
-    );
+    expect(page.url()).toContain(URLS.productPage);
 
     // Step 2: Click on add to cart
     await productPage.addProductToCart();
@@ -38,6 +37,6 @@ test.describe(`Product page`, () => {
     await productPage.clickOnBackToProducts();
 
     // Step 7: Verify user navigated to inventory page again
-    await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(page).toHaveURL(URLS.inventoryPage);
   });
 });

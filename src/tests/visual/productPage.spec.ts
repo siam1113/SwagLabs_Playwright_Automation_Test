@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import InventoryPage from "../../pageObjects/InventoryPage";
 import LoginPage from "../../pageObjects/LoginPage";
 import ProductPage from "../../pageObjects/ProductPage";
+import { URLS } from "../../pageData/pageData";
 
 test.skip("Product page", async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -10,11 +11,11 @@ test.skip("Product page", async ({ page }) => {
   // Step 0: Navigate to login page and login
   await page.goto("/");
   await loginPage.logIntoApplication();
-  await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+  await expect(page).toHaveURL(URLS.inventoryPage);
 
   // Step 3: Click on add single product in the cart
   await inventoryPage.clickOnTheProduct();
-  expect(page.url()).toContain("https://www.saucedemo.com/inventory-item.html");
+  expect(page.url()).toContain(URLS.productPage);
 
   // Step 4: Compare the screenshots
   await expect(page).toHaveScreenshot();
