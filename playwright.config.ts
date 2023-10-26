@@ -11,7 +11,7 @@ import { devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: "./src/tests",
+  testDir: "./__checks__/src/tests",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [["html"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -39,9 +39,9 @@ const config: PlaywrightTestConfig = {
     baseURL: "https://www.saucedemo.com",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: "on",
+    video: "on",
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
@@ -49,6 +49,9 @@ const config: PlaywrightTestConfig = {
       testIgnore: "./src/tests/visual/*",
       use: {
         ...devices["Desktop Chrome"],
+        launchOptions: {
+          slowMo: 500,
+        },
       },
     },
 

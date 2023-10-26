@@ -18,7 +18,7 @@ test.only(`Verify completing order with multiple item`, async ({
   let products: string[];
 
   // Step 0: Navigate to login page
-  await page.goto("/");
+  await page.goto(URLS.homePage);
 
   // Step 1: Login
   await loginPage.logIntoApplication();
