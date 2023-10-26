@@ -45,7 +45,7 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "functional",
+      name: "functional-test",
       testIgnore: "./src/tests/visual/*",
       use: {
         ...devices["Desktop Chrome"],
