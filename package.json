@@ -8,6 +8,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.29.2"
+    "@playwright/test": "^1.29.2",
+    "checkly": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
   }
 }

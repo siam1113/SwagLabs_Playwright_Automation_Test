@@ -6,44 +6,45 @@ import LoginPage from "../../pageObjects/LoginPage";
 import ProductPage from "../../pageObjects/ProductPage";
 import { URLS } from "../../pageData/pageData";
 
-test.only(`Verify completing order with multiple item`, async ({
-  page,
-  context,
-}) => {
+test(`Verify completing order with one item`, async ({ page }) => {
   const loginPage = new LoginPage(page);
   const inventoryPage = new InventoryPage(page);
   const productPage = new ProductPage(page);
   const cartPage = new CartPage(page);
   const checkOutPage = new CheckoutPage(page);
-  let products: string[];
+  let product;
 
   // Step 0: Navigate to login page
-  await page.goto("/");
+  await page.goto(URLS.homePage);
 
   // Step 1: Login
   await loginPage.logIntoApplication();
   await expect(page).toHaveURL(URLS.inventoryPage);
 
-  // Step 2: Add multiple product from the inventory page
-  products = await inventoryPage.addMultipleProductInTheCart();
-  await expect(productPage.cartProductCount).toHaveText("3");
+  // Step 2: View a product
+  await inventoryPage.clickOnTheProduct();
+  expect(page.url()).toContain(URLS.productPage);
 
-  // Step 3: Navigate to cart page
+  // Step 3: Add the product in cart
+  product = await productPage.addProductToCart();
+  await expect(productPage.cartProductCount).toHaveText("1");
+
+  // Step 4: Go to cart
   await productPage.clickOnCartIcon();
   await expect(page).toHaveURL(URLS.cartPage);
 
-  // // Step 5: Verify added products are in the cart
-  // await cartPage.verifyAddedProductsAreInTheCart(products);
+  // Step 5: Verify added products are in the cart
+  await cartPage.verifyAddedProductAreInTheCart(product);
 
-  // Step 4: Click on checkout
+  // Step 6: Click on checkout
   await cartPage.clickOnCheckout();
   await expect(page).toHaveURL(URLS.checkOutPageStepOne);
 
-  // Step 5: Fill checkout information and continue
+  // Step 7: Fill checkout information and continue
   await checkOutPage.fillUpCheckoutInformationAndContinue();
   await expect(page).toHaveURL(URLS.checkOutPageStepTwo);
 
-  // Step 6: Finish the checkout process
+  // Step 8: Finish the checkout process
   await checkOutPage.clickOnFinishBtn();
   await expect(page).toHaveURL(URLS.checkOutPageComplete);
   await expect(checkOutPage.completeOrderMsg).toBeVisible();
