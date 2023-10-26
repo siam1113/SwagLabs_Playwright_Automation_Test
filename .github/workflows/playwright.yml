@@ -23,7 +23,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests smoke and e2e
-        run: npx playwright test --project=functional
+        run: git branch && npx playwright test --project=functional
       - uses: actions/upload-artifact@v3
         if: always()
         with:
