@@ -6,6 +6,7 @@ on:
     branches: [main, master]
   schedule:
     - cron: '*/5 * * * *'
+  repository_dispatch:
 
 jobs:
   test:
